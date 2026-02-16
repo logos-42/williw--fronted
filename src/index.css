@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-card: rgba(255, 255, 255, 0.05);
+  --color-accent-orange: #ff6b00;
+  --color-accent-red: #ff0000;
+  --color-accent-yellow: #ffaa00;
+  --color-accent-pink: #ff00aa;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1aa;
+  --font-family-sans: 'Inter', 'Roboto', system-ui, sans-serif;
+  
+  /* 自定义颜色 */
+  --color-deep-space: #0a0a0f;
+  --color-neon-orange: #ff6b00;
+  --color-neon-red: #ff0000;
+  
+  /* 自定义动画 */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-accent-orange), var(--color-accent-red), var(--color-accent-yellow));
+  border-radius: 4px;
+}
+
+/* 玻璃拟态效果 */
+.glass {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 发光效果 */
+.glow {
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-red), var(--color-accent-yellow), var(--color-accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 按钮渐变 */
+.btn-gradient {
+  background: linear-gradient(90deg, var(--color-accent-orange), var(--color-accent-red));
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* 动画 */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 0, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.6); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

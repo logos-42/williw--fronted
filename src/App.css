@@ -1,0 +1,53 @@
+.gradient-text {
+  background: linear-gradient(90deg, #00d4ff 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #00d4ff 0%, #8b5cf6 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.text-text-secondary {
+  color: #a0aec0; /* 或者使用Tailwind的颜色 */
+}
+
+.accent-blue {
+  color: #00d4ff;
+}
+
+/* 为Hero组件中的网格背景添加样式 */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}

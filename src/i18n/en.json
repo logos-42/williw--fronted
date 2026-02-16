@@ -1,0 +1,84 @@
+{
+  "header": {
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "download": "Download",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "title": "Unlock Computing Power, Connect Global Resources",
+    "subtitle": "Connect your phone, computer, and tablet to build your own computing network",
+    "ctaPrimary": "Get Started",
+    "ctaSecondary": "Learn More"
+  },
+  "features": {
+    "title": "Features",
+    "items": [
+      {
+        "icon": "🚀",
+        "title": "Monetize Idle Computing",
+        "description": "Contribute your device's idle computing power to the global network and earn real-time rewards"
+      },
+      {
+        "icon": "🔒",
+        "title": "Secure & Reliable",
+        "description": "End-to-end encryption with zero-knowledge proof privacy protection"
+      },
+      {
+        "icon": "⚡",
+        "title": "Efficient Scheduling",
+        "description": "Smart task allocation with nearby node priority for minimum latency"
+      },
+      {
+        "icon": "💰",
+        "title": "Transparent Earnings",
+        "description": "Blockchain technology ensures every earning is transparent and verifiable"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Download Client",
+        "description": "Choose your platform and download the Williw client"
+      },
+      {
+        "number": "2",
+        "title": "Contribute Power",
+        "description": "Launch the client and your device will automatically join the network"
+      },
+      {
+        "number": "3",
+        "title": "Earn Rewards",
+        "description": "View your earnings in real-time and withdraw to your wallet anytime"
+      }
+    ]
+  },
+  "download": {
+    "title": "Download Williw",
+    "subtitle": "Choose your platform to get started",
+    "download": "Download",
+    "platforms": {
+      "windows": {
+        "name": "Windows",
+        "version": "v0.1.1"
+      },
+      "macos": {
+        "name": "macOS (x86)",
+        "version": "v0.1.1"
+      }
+    },
+    "comingSoon": "Coming Soon"
+  },
+  "footer": {
+    "copyright": "© 2026 Williw. All rights reserved.",
+    "links": {
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "discord": "Discord",
+      "email": "Email"
+    }
+  }
+}
