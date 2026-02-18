@@ -39,14 +39,11 @@ const platformItems = [
     sha256: '33afa034a0f5647ef460448310ffde4854cdded47f260b3aaa72a03d10982f77',
     badge: 'x86_64',
     releaseNotes: [
-      'NSIS installer (.exe)',
-      'MSI package also available',
+      'P2P node with iroh QUIC transport',
+      'Model inference · 768-dim tensor',
+      'Tauri desktop application',
+      'Device-adaptive scheduler',
     ],
-    extraDownload: {
-      label: 'Download .msi',
-      url: `${GITHUB_RELEASE_BASE}/${RELEASE_VERSION}/Williw.Desktop_0.1.1_x64_en-US.msi`,
-      sha256: '404f0af4bf9f312eaebeb1fe867ba240058d60aa363edbe363bcae27914c11dc',
-    },
   },
 ];
 
