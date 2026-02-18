@@ -1,53 +1,44 @@
+/* App.css - overrides for black/white PSO theme */
+
 .gradient-text {
-  background: linear-gradient(90deg, #00d4ff 0%, #8b5cf6 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #666666 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
 
 .btn-gradient {
-  background: linear-gradient(90deg, #00d4ff 0%, #8b5cf6 100%);
+  background: #ffffff;
+  color: #000000;
+}
+
+.btn-gradient:hover {
+  background: #e0e0e0;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.25);
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glow {
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-}
-
-@keyframes pulse-glow {
-  0% {
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s infinite;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
 }
 
 .text-text-secondary {
-  color: #a0aec0; /* 或者使用Tailwind的颜色 */
+  color: #888888;
 }
 
-.accent-blue {
-  color: #00d4ff;
+.accent-white {
+  color: #ffffff;
 }
 
-/* 为Hero组件中的网格背景添加样式 */
+/* PSO grid overlay */
 .grid-bg {
-  background-image: 
-    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
 }

@@ -15,71 +15,77 @@ export default function Features() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut' as const,
-      },
+      transition: { duration: 0.55, ease: 'easeOut' as const },
     },
   };
 
   return (
-    <section id="features" className="py-32 px-8 relative flex justify-center">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#12121a] to-[#0a0a0f]" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
+    <section id="features" className="py-32 px-8 relative flex justify-center bg-black">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 grid-bg opacity-60" />
+      {/* Top separator line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center justify-center mb-20"
+          className="flex flex-col items-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center w-full leading-relaxed">
+          <span className="mono text-xs tracking-widest text-white/30 uppercase mb-4">
+            — Features —
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white text-center leading-tight tracking-tight">
             {t('features.title')}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 rounded-full" />
+          <div className="mt-6 divider" />
         </motion.div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ 
-                scale: 1.02,
-                transition: { duration: 0.2 }
-              }}
-              className="glass p-10 rounded-2xl group hover:border-orange-500/30 transition-all duration-300"
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className="card-border p-8 rounded-xl group cursor-default"
             >
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              {/* Index number */}
+              <div className="mono text-xs text-white/20 mb-6 tracking-widest">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+
+              {/* Icon */}
+              <div className="text-3xl mb-5 grayscale group-hover:grayscale-0 transition-all duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-orange-400 transition-colors">
+
+              <h3 className="text-base font-semibold mb-3 text-white group-hover:text-white/90 tracking-tight">
                 {feature.title}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-white/40 text-sm leading-relaxed">
                 {feature.description}
               </p>
+
+              {/* Bottom accent line */}
+              <div className="mt-6 w-0 group-hover:w-full h-px bg-white/20 transition-all duration-500" />
             </motion.div>
           ))}
         </motion.div>

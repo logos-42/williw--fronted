@@ -24,46 +24,44 @@ export default function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3' : 'py-5'
+        scrolled
+          ? 'bg-black/80 backdrop-blur-md border-b border-white/5 py-3'
+          : 'py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Williw" className="w-10 h-10 rounded-lg object-cover" />
-          <span className="text-2xl font-bold gradient-text">Williw</span>
+        <div className="flex items-center gap-3">
+          <img src={logo} alt="Williw" className="w-8 h-8 rounded-md object-cover grayscale" />
+          <span className="text-xl font-bold tracking-tight text-white">Williw</span>
         </div>
 
-        {/* 导航 */}
+        {/* Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <button
-            onClick={() => scrollToSection('features')}
-            className="text-text-secondary hover:text-white transition-colors"
-          >
-            {t('header.features')}
-          </button>
-          <button
-            onClick={() => scrollToSection('how-it-works')}
-            className="text-text-secondary hover:text-white transition-colors"
-          >
-            {t('header.howItWorks')}
-          </button>
-          <button
-            onClick={() => scrollToSection('download')}
-            className="text-text-secondary hover:text-white transition-colors"
-          >
-            {t('header.download')}
-          </button>
+          {[
+            { label: t('header.features'), id: 'features' },
+            { label: t('header.howItWorks'), id: 'how-it-works' },
+            { label: t('header.download'), id: 'download' },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="relative text-sm text-white/50 hover:text-white transition-colors duration-200 group"
+            >
+              {item.label}
+              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+            </button>
+          ))}
         </nav>
 
-        {/* CTA 按钮 */}
+        {/* CTA */}
         <button
           onClick={() => scrollToSection('download')}
-          className="btn-gradient px-6 py-2 rounded-full font-semibold text-white"
+          className="btn-gradient px-5 py-2 rounded-full text-sm font-semibold tracking-wide"
         >
           {t('header.getStarted')}
         </button>
