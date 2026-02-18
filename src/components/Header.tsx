@@ -57,13 +57,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <button
-          onClick={() => scrollToSection('download')}
-          className="btn-gradient px-5 py-2 rounded-full text-sm font-semibold tracking-wide"
-        >
-          {t('header.getStarted')}
-        </button>
       </div>
     </motion.header>
   );

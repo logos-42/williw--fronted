@@ -221,29 +221,31 @@ export default function Hero() {
           {t('hero.title')}
         </motion.h1>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
-          className="text-lg md:text-xl text-white/45 mb-10 max-w-2xl mx-auto leading-relaxed text-center not-italic font-normal"
+          className="w-full flex justify-center mb-10"
         >
-          {t('hero.subtitle')}
-        </motion.p>
+          <p className="text-lg md:text-xl text-white/45 leading-relaxed not-italic font-normal text-center max-w-xl">
+            {t('hero.subtitle')}
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-3 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           {/* macOS download */}
           <a
             href="https://github.com/logos-42/williw/releases/download/v0.1.1/Williw.Desktop_0.1.1_x64.dmg"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gradient px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide inline-flex items-center justify-center gap-2"
+            className="btn-gradient px-10 py-4 rounded-full font-bold text-base tracking-wide inline-flex items-center justify-center gap-3 min-w-[220px]"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.13 2.04 14.13 1.5C14.13 0.67 13.13 0 12 0C10.87 0 9.87 0.67 9.87 1.5C9.87 2.04 10.27 2.67 11 3.5H13Z"/>
             </svg>
             Download for macOS
@@ -254,9 +256,9 @@ export default function Hero() {
             href="https://github.com/logos-42/williw/releases/download/v0.1.1/Williw.Desktop_0.1.1_x64-setup.exe"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide inline-flex items-center justify-center gap-2"
+            className="btn-outline px-10 py-4 rounded-full font-bold text-base tracking-wide inline-flex items-center justify-center gap-3 min-w-[220px]"
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3 5.5L10.5 4.5V11.5H3V5.5ZM3 18.5V12.5H10.5V19.5L3 18.5ZM11 5.5L21 4.5V11.5H11V5.5ZM11 18.5L21 19.5V12.5H11V18.5Z"/>
             </svg>
             Download for Windows
