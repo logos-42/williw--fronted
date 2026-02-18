@@ -45,7 +45,6 @@ export default function Header() {
           {[
             { label: t('header.features'), id: 'features' },
             { label: t('header.howItWorks'), id: 'how-it-works' },
-            { label: t('header.download'), id: 'download' },
           ].map((item) => (
             <button
               key={item.id}
