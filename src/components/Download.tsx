@@ -34,11 +34,19 @@ const platformItems = [
     id: 'windows',
     nameKey: 'windows',
     icon: 'windows' as const,
-    available: false,
-    downloadUrl: null,
-    sha256: null,
-    badge: null,
-    releaseNotes: [],
+    available: true,
+    downloadUrl: `${GITHUB_RELEASE_BASE}/${RELEASE_VERSION}/Williw.Desktop_0.1.1_x64-setup.exe`,
+    sha256: '33afa034a0f5647ef460448310ffde4854cdded47f260b3aaa72a03d10982f77',
+    badge: 'x86_64',
+    releaseNotes: [
+      'NSIS installer (.exe)',
+      'MSI package also available',
+    ],
+    extraDownload: {
+      label: 'Download .msi',
+      url: `${GITHUB_RELEASE_BASE}/${RELEASE_VERSION}/Williw.Desktop_0.1.1_x64_en-US.msi`,
+      sha256: '404f0af4bf9f312eaebeb1fe867ba240058d60aa363edbe363bcae27914c11dc',
+    },
   },
 ];
 
@@ -177,12 +185,31 @@ export default function Download() {
                   </button>
                 )}
 
-                {/* SHA256 */}
+                {/* SHA256 for primary download */}
                 {platform.sha256 && (
                   <div className="mt-4 p-3 rounded-lg bg-white/3 border border-white/5">
                     <p className="mono text-[10px] text-white/25 leading-relaxed break-all">
                       sha256: {platform.sha256}
                     </p>
+                  </div>
+                )}
+
+                {/* Extra download (e.g. Windows MSI) */}
+                {'extraDownload' in platform && platform.extraDownload && (
+                  <div className="mt-3">
+                    <a
+                      href={platform.extraDownload.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-2.5 rounded-lg text-sm text-center text-white/50 hover:text-white border border-white/8 hover:border-white/20 transition-all duration-200 mono tracking-wide"
+                    >
+                      {platform.extraDownload.label}
+                    </a>
+                    <div className="mt-2 p-3 rounded-lg bg-white/3 border border-white/5">
+                      <p className="mono text-[10px] text-white/25 leading-relaxed break-all">
+                        sha256: {platform.extraDownload.sha256}
+                      </p>
+                    </div>
                   </div>
                 )}
               </motion.div>
