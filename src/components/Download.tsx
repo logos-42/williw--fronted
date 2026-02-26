@@ -23,6 +23,8 @@ const platformItems = [
     downloadUrl: `${GITHUB_RELEASE_BASE}/${RELEASE_VERSION}/Williw.Desktop_0.1.1_x64.dmg`,
     sha256: 'f59249ac3f641c2de3b9f23044c7326f7d17c8f1c626da22470444e6996f19e9',
     badge: 'x86_64',
+    gradient: 'from-cyan-500 to-blue-600',
+    glowColor: 'rgba(0, 212, 255, 0.3)',
     releaseNotes: [
       'P2P node with iroh QUIC transport',
       'Model inference · 768-dim tensor',
@@ -38,6 +40,8 @@ const platformItems = [
     downloadUrl: `${GITHUB_RELEASE_BASE}/${RELEASE_VERSION}/Williw.Desktop_0.1.1_x64-setup.exe`,
     sha256: '33afa034a0f5647ef460448310ffde4854cdded47f260b3aaa72a03d10982f77',
     badge: 'x86_64',
+    gradient: 'from-purple-500 to-pink-600',
+    glowColor: 'rgba(139, 92, 246, 0.3)',
     releaseNotes: [
       'P2P node with iroh QUIC transport',
       'Model inference · 768-dim tensor',
@@ -69,53 +73,49 @@ export default function Download() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.94, y: 24 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.6, 
-        ease: [0.25, 0.4, 0.25, 1] as const 
-      } 
-    },
+    hidden: { opacity: 0, scale: 0.92 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' as const } },
   };
 
   return (
-    <section id="download" className="py-32 px-8 relative flex justify-center bg-black overflow-hidden">
-      {/* Ambient background effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/[0.03] rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-white/[0.02] rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-white/[0.015] to-transparent rounded-full" />
-      </div>
+    <section id="download" className="py-40 px-8 relative flex justify-center bg-black overflow-hidden">
+      {/* Enhanced background */}
+      <div className="absolute inset-0 grid-bg opacity-50" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       
-      <div className="absolute grid-bg inset-0 opacity-40" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {/* Background glows */}
+      <div className="absolute top-1/2 -left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute top-1/2 -right-1/4 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full blur-3xl" />
 
-      <div className="relative z-10 max-w-4xl mx-auto w-full">
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const }}
-          className="flex flex-col items-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center mb-20"
         >
-          <span className="mono text-xs tracking-widest text-white/30 uppercase mb-4">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mono text-xs tracking-[0.3em] text-white/40 uppercase mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5"
+          >
             — Download —
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white text-center leading-tight tracking-tight mb-4">
-            {t('download.title')}
+          </motion.span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight tracking-tight mb-4">
+            <span className="gradient-text">{t('download.title')}</span>
           </h2>
-          <p className="text-white/40 text-base text-center max-w-lg">
+          <p className="text-white/50 text-base text-center max-w-lg mb-6">
             {t('download.subtitle')}
           </p>
-          <div className="mt-6 divider" />
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent" />
         </motion.div>
 
         <motion.div
@@ -123,7 +123,7 @@ export default function Download() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {platformItems.map((platform) => {
             const pInfo = platforms[platform.nameKey as keyof Platforms];
@@ -131,137 +131,128 @@ export default function Download() {
               <motion.div
                 key={platform.id}
                 variants={itemVariants}
-                whileHover={{ y: platform.available ? -6 : 0, transition: { duration: 0.25 } }}
-                className="relative card-border p-8 rounded-2xl group"
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group relative"
               >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-500" />
-                
-                {/* Header row */}
-                <div className="flex items-center gap-4 mb-6 relative">
-                  {/* Platform icon with glow */}
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-white/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-60 transition-all duration-500" />
-                    <div className="relative text-white/60 group-hover:text-white transition-colors duration-300">
-                      {platform.id === 'macos'
-                        ? <MacIcon className="w-10 h-10" />
-                        : <WindowsIcon className="w-10 h-10" />}
+                {/* Card with gradient border on hover */}
+                <div className="card-gradient-border p-8 rounded-2xl h-full relative overflow-hidden">
+                  {/* Platform-specific glow */}
+                  <div 
+                    className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl transition-opacity duration-500 opacity-0 group-hover:opacity-60"
+                    style={{ background: `radial-gradient(circle, ${platform.glowColor} 0%, transparent 70%)` }}
+                  />
+
+                  {/* Header row */}
+                  <div className="flex items-center gap-4 mb-6 relative">
+                    {/* Icon with gradient border */}
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${platform.gradient} p-[2px] group-hover:scale-110 transition-transform duration-300`}>
+                      <div className="w-full h-full rounded-xl bg-black/90 flex items-center justify-center">
+                        <div className="text-white/70 group-hover:text-white transition-colors duration-300">
+                          {platform.id === 'macos'
+                            ? <MacIcon className="w-8 h-8" />
+                            : <WindowsIcon className="w-8 h-8" />}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-xl font-semibold text-white tracking-tight">
+                          {pInfo.name}
+                        </h3>
+                        {platform.badge && (
+                          <span className={`mono text-[10px] px-2 py-0.5 rounded-full bg-gradient-to-r ${platform.gradient} text-white tracking-widest`}>
+                            {platform.badge}
+                          </span>
+                        )}
+                      </div>
+                      <span className="mono text-xs text-white/40 tracking-wide">
+                        {pInfo.version}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold text-white tracking-tight">
-                        {pInfo.name}
-                      </h3>
-                      {platform.badge && (
-                        <span className="mono text-[10px] px-1.5 py-0.5 rounded border border-white/15 text-white/40 tracking-widest">
-                          {platform.badge}
-                        </span>
-                      )}
+
+                  {/* Release notes */}
+                  {platform.releaseNotes.length > 0 && (
+                    <div className="mb-6 p-4 rounded-xl bg-white/3 border border-white/5 relative">
+                      <ul className="space-y-2">
+                        {platform.releaseNotes.map((note, i) => (
+                          <li key={i} className="flex items-start gap-2 text-white/40 text-xs mono">
+                            <span className={`text-white/30 mt-0.5 shrink-0 w-1.5 h-1.5 rounded-full bg-gradient-to-r ${platform.gradient}`} />
+                            {note}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <span className="mono text-xs text-white/30 tracking-wide">
-                      {pInfo.version}
+                  )}
+
+                  {/* Status indicator */}
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className={`w-2 h-2 rounded-full ${platform.available ? 'bg-emerald-400' : 'bg-white/20'} animate-pulse`} />
+                    <span className="mono text-xs text-white/40 tracking-widest uppercase">
+                      {platform.available ? 'Available Now' : 'Coming Soon'}
                     </span>
                   </div>
-                </div>
 
-                {/* Release notes (macOS only) */}
-                {platform.releaseNotes.length > 0 && (
-                  <ul className="mb-6 space-y-1.5 relative">
-                    {platform.releaseNotes.map((note, i) => (
-                      <li key={i} className="flex items-start gap-2 text-white/35 text-xs mono">
-                        <span className="text-white/20 mt-0.5 shrink-0">·</span>
-                        {note}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Status */}
-                <div className="flex items-center gap-2 mb-6 relative">
-                  <span className={`w-1.5 h-1.5 rounded-full ${platform.available ? 'bg-white/70 shadow-[0_0_8px_rgba(255,255,255,0.4)]' : 'bg-white/20'}`} />
-                  <span className="mono text-xs text-white/40 tracking-widest uppercase">
-                    {platform.available ? 'Available' : 'Coming Soon'}
-                  </span>
-                </div>
-
-                {/* Download button */}
-                {platform.available && platform.downloadUrl ? (
-                  <a
-                    href={platform.downloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative w-full py-3.5 rounded-lg font-semibold text-sm tracking-wide transition-all duration-300 text-center block overflow-hidden group/btn"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/5 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover/btn:animate-shine" />
-                    <span className="relative flex items-center justify-center gap-2">
-                      <span>{t('download.download')} {pInfo.name}</span>
-                      <svg className="w-4 h-4 opacity-60 group-hover/btn:opacity-100 group-hover/btn:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                    </span>
-                  </a>
-                ) : (
-                  <button
-                    disabled
-                    className="w-full py-3.5 rounded-lg font-semibold text-sm tracking-wide bg-white/5 text-white/20 cursor-not-allowed border border-white/5"
-                  >
-                    {t('download.comingSoon')}
-                  </button>
-                )}
-
-                {/* SHA256 for primary download */}
-                {platform.sha256 && (
-                  <div className="mt-4 p-3 rounded-lg bg-white/[0.02] border border-white/8 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] via-transparent to-white/[0.02]" />
-                    <p className="mono text-[10px] text-white/35 leading-relaxed break-all relative">
-                      <span className="text-white/25">sha256:</span> {platform.sha256}
-                    </p>
-                  </div>
-                )}
-
-                {/* Extra download (e.g. Windows MSI) */}
-                {'extraDownload' in platform && platform.extraDownload && (
-                  <div className="mt-3 relative">
+                  {/* Download button */}
+                  {platform.available && platform.downloadUrl ? (
                     <a
-                      href={platform.extraDownload.url}
+                      href={platform.downloadUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full py-2.5 rounded-lg text-sm text-center text-white/50 hover:text-white border border-white/8 hover:border-white/20 transition-all duration-200 mono tracking-wide"
+                      className={`block w-full py-4 rounded-xl font-semibold text-sm tracking-wide text-center transition-all duration-300 bg-gradient-to-r ${platform.gradient} text-white hover:shadow-lg group-hover:scale-[1.02] relative overflow-hidden`}
                     >
-                      {platform.extraDownload.label}
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        {t('download.download')} {pInfo.name}
+                      </span>
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                     </a>
-                    <div className="mt-2 p-3 rounded-lg bg-white/[0.02] border border-white/8">
-                      <p className="mono text-[10px] text-white/35 leading-relaxed break-all">
-                        <span className="text-white/25">sha256:</span> {platform.extraDownload.sha256}
+                  ) : (
+                    <button
+                      disabled
+                      className="w-full py-4 rounded-xl font-semibold text-sm tracking-wide bg-white/5 text-white/20 cursor-not-allowed border border-white/5"
+                    >
+                      {t('download.comingSoon')}
+                    </button>
+                  )}
+
+                  {/* SHA256 */}
+                  {platform.sha256 && (
+                    <div className="mt-4 p-3 rounded-lg bg-black/30 border border-white/5">
+                      <p className="mono text-[10px] text-white/30 leading-relaxed break-all">
+                        <span className="text-white/50">SHA256: </span>{platform.sha256}
                       </p>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* Release link */}
+        {/* GitHub release link */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 text-center relative"
+          className="mt-12 text-center"
         >
           <a
             href={`https://github.com/logos-42/williw/releases/tag/${RELEASE_VERSION}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mono text-xs text-white/25 hover:text-white/60 transition-colors duration-200 tracking-widest inline-flex items-center gap-2 group"
+            className="group inline-flex items-center gap-2 mono text-xs text-white/30 hover:text-white/70 transition-colors duration-200 tracking-widest"
           >
-            <span>View all releases on GitHub</span>
-            <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+            <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            View all releases on GitHub
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
         </motion.div>
       </div>

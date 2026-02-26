@@ -15,138 +15,194 @@ export default function HowItWorks() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.25 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.96 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
+      transition: { duration: 0.7, ease: 'easeOut' as const },
     },
   };
 
+  // Step icons
+  const stepIcons = [
+    // Download icon
+    <svg key="download" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+    </svg>,
+    // Power icon
+    <svg key="power" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>,
+    // Rewards icon
+    <svg key="rewards" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>,
+  ];
+
+  const stepGradients = [
+    'from-cyan-400 to-blue-500',
+    'from-purple-400 to-pink-500',
+    'from-amber-400 to-orange-500',
+  ];
+
   return (
-    <section id="how-it-works" className="py-36 px-6 relative flex justify-center bg-black overflow-hidden">
-      {/* Subtle grid */}
-      <div 
-        className="absolute inset-0 opacity-30"
+    <section id="how-it-works" className="py-40 px-8 relative overflow-hidden flex justify-center bg-black">
+      {/* Enhanced grid background */}
+      <div
+        className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
           `,
           backgroundSize: '40px 40px',
         }}
       />
-
-      {/* Ambient glow orbs - matching Features section */}
-      <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] bg-neon-blue/[0.03] rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-neon-purple/[0.03] rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Top separator line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+      
+      {/* Background glows */}
+      <div className="absolute top-1/3 -left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 -right-1/4 w-96 h-96 bg-gradient-to-bl from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+          transition={{ duration: 0.6 }}
           className="flex flex-col items-center mb-24"
         >
-          <span className="mono text-xs tracking-[0.3em] text-white/25 uppercase mb-5">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mono text-xs tracking-[0.3em] text-white/40 uppercase mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5"
+          >
             — How it works —
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white text-center leading-tight tracking-tight">
-            {t('howItWorks.title')}
+          </motion.span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center leading-tight tracking-tight mb-8">
+            <span className="gradient-text">{t('howItWorks.title')}</span>
           </h2>
-          <div className="mt-6 divider" />
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-neon-pink to-transparent" />
         </motion.div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: '-80px' }}
           className="relative"
         >
-          {/* Enhanced connecting line - animated gradient line */}
-          <div className="hidden lg:block absolute top-[52px] left-[calc(16.666%+24px)] right-[calc(16.666%+24px)] h-px overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            <motion.div
-              className="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-neon-blue/60 via-neon-purple/60 to-transparent"
-              animate={{
-                x: ['-100%', '200%'],
+          {/* Animated connecting line (desktop) */}
+          <div className="hidden lg:block absolute top-8 left-[16.666%] right-[16.666%] h-px overflow-hidden">
+            <div
+              className="w-full h-full relative"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 4px, transparent 4px, transparent 12px)',
               }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                repeatDelay: 2,
-              }}
-            />
+            >
+              {/* Animated glow traveling along the line */}
+              <motion.div
+                initial={{ x: '-100%' }}
+                whileInView={{ x: '100%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                className="absolute top-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-r from-transparent via-white to-transparent blur-sm"
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -8, 
-                  transition: { duration: 0.3, ease: [0.25, 0.4, 0.25, 1] } 
-                }}
-                className="group relative"
+                className="relative flex flex-col items-center text-center group"
               >
-                {/* Outer glow on hover */}
-                <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                
-                {/* Glass card - matching Features style */}
-                <div className="relative p-8 rounded-2xl bg-gradient-to-b from-white/[0.07] to-black/40 border border-white/[0.08] group-hover:border-white/15 transition-all duration-500 backdrop-blur-sm">
+                {/* Step number with enhanced styling */}
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative mb-8 z-10"
+                >
+                  {/* Outer glow ring */}
+                  <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${stepGradients[index]} blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-300`} />
                   
-                  {/* Corner accent - matching Features */}
-                  <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
-                    <div className="absolute top-2 right-2 w-8 h-8 border-t border-r border-white/10 rounded-tr-lg group-hover:border-neon-blue/30 group-hover:w-10 group-hover:h-10 transition-all duration-500" />
-                  </div>
-
-                  {/* Step number with glow effect */}
-                  <div className="relative mb-6">
-                    {/* Glow background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      className="relative w-14 h-14 rounded-full border border-white/15 flex items-center justify-center bg-white/[0.03] group-hover:bg-white/[0.06] group-hover:border-white/25 transition-all duration-500"
-                    >
-                      <span className="mono text-lg font-semibold text-white/70 group-hover:text-white transition-colors duration-300">
+                  {/* Main circle */}
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${stepGradients[index]} p-[2px] shadow-lg`}
+                  >
+                    <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                      <span className={`text-lg font-bold bg-gradient-to-br ${stepGradients[index]} bg-clip-text text-transparent`}>
                         {step.number}
                       </span>
-                    </motion.div>
-                  </div>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Pulsing ring */}
+                  <div className="absolute inset-0 rounded-full border border-white/10 animate-ping opacity-20" style={{ animationDuration: '3s' }} />
+                </motion.div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold mb-3 text-white/90 group-hover:text-white tracking-tight transition-colors duration-300">
+                {/* Icon display */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className={`mb-4 w-12 h-12 rounded-xl bg-gradient-to-br ${stepGradients[index]} p-[1.5px] opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
+                >
+                  <div className="w-full h-full rounded-xl bg-black/90 flex items-center justify-center text-white/70 group-hover:text-white transition-colors">
+                    {stepIcons[index]}
+                  </div>
+                </motion.div>
+
+                {/* Card */}
+                <div className="card-gradient-border p-8 rounded-2xl w-full shimmer group-hover:scale-[1.02] transition-transform duration-300">
+                  <h3 className="text-xl font-semibold mb-3 text-white tracking-tight">
                     {step.title}
                   </h3>
-                  
-                  {/* Description */}
-                  <p className="text-white/40 text-sm leading-relaxed group-hover:text-white/55 transition-colors duration-300">
+                  <p className="text-white/50 text-sm leading-relaxed">
                     {step.description}
                   </p>
-
-                  {/* Bottom accent line with animated width - matching Features */}
-                  <div className="mt-8 w-8 h-px bg-white/10 group-hover:w-full group-hover:bg-gradient-to-r group-hover:from-neon-blue/40 group-hover:via-neon-purple/40 group-hover:to-transparent transition-all duration-500" />
+                  
+                  {/* Bottom accent */}
+                  <div className="mt-6 flex items-center justify-center gap-1">
+                    <div className={`w-8 h-px bg-gradient-to-r ${stepGradients[index]}`} />
+                    <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-br ${stepGradients[index]}`} />
+                    <div className={`w-8 h-px bg-gradient-to-l ${stepGradients[index]}`} />
+                  </div>
                 </div>
 
-                {/* Subtle reflection */}
-                <div className="absolute -bottom-px left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Connection dot for mobile */}
+                {index < steps.length - 1 && (
+                  <div className="lg:hidden w-px h-8 my-4 bg-gradient-to-b from-white/20 to-transparent" />
+                )}
               </motion.div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass-strong border border-white/10">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="mono text-xs text-white/40 tracking-widest">READY TO GET STARTED?</span>
           </div>
         </motion.div>
       </div>
